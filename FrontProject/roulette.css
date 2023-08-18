@@ -1,0 +1,144 @@
+@media (max-width: 1240px) {
+.image_logo{
+ display: inline-block;
+  width: 70%;
+    }}
+@media (min-width: 1241px) {
+.image_logo{
+ display: inline-block;
+  width: 30%;
+    }}
+.table {
+  animation: draw 11s linear infinite;
+  stroke: #fff;
+}
+.ball {
+  animation: levitate 0.5s alternate ease-in-out infinite;
+  fill: #fff;
+}
+.gold {
+  fill: #fff;
+}
+.roulette {
+  display: flex;
+  justify-content: center;
+  margin: 0 auto 24px;
+  max-width: 500px;
+}
+.roulette svg {
+  fill: #B2AB46;
+  font-size: 32px;
+  height: 300px;
+  width: 300px;
+}
+@keyframes draw {
+  from {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes levitate {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(0, 2px);
+  }
+}
+@media (max-width: 1125px) {
+    .loader {
+  width: 16px;
+  height: 16px;
+  box-shadow: 0 30px, 0 -30px;
+  border-radius: 4px;
+  background: currentColor;
+  display: block;
+  margin-left: 40%;
+  position: relative;
+  color: #FFF;
+  transform: translateY(30px);
+  box-sizing: border-box;
+    }
+.loader::after,
+.loader::before {
+  content: '';  
+  box-sizing: border-box;
+  width: 16px;
+  height: 16px;
+  box-shadow: 0 30px, 0 -30px;
+  border-radius: 4px;
+  background: currentColor;
+  color: #FFF;
+  position: absolute;
+  left: 30px;
+  top: 0;
+  animation: animloader 2s 0.2s ease infinite;
+}
+.loader::before {
+  animation-delay: 0.4s;
+  left: 60px;
+}
+
+@keyframes animloader {
+  0% {
+    top: 0;
+    color: white;
+  }
+  50% {
+    top: 30px;
+    color: rgba(255, 255, 255, 0.2);
+  }
+  100% {
+    top: 0;
+    color: white;
+  }
+}
+}
+@media (min-width: 1126px) {
+    .loader {
+  width: 16px;
+  height: 16px;
+  box-shadow: 0 30px, 0 -30px;
+  border-radius: 4px;
+  background: currentColor;
+  display: block;
+  margin-left: 47%;
+  position: relative;
+  color: #FFF;
+  transform: translateY(30px);
+  box-sizing: border-box;
+    }
+.loader::after,
+.loader::before {
+  content: '';  
+  box-sizing: border-box;
+  width: 16px;
+  height: 16px;
+  box-shadow: 0 30px, 0 -30px;
+  border-radius: 4px;
+  background: currentColor;
+  color: #FFF;
+  position: absolute;
+  left: 30px;
+  top: 0;
+  animation: animloader 2s 0.2s ease infinite;
+}
+.loader::before {
+  animation-delay: 0.4s;
+  left: 60px;
+}
+
+@keyframes animloader {
+  0% {
+    top: 0;
+    color: white;
+  }
+  50% {
+    top: 30px;
+    color: rgba(255, 255, 255, 0.2);
+  }
+  100% {
+    top: 0;
+    color: white;
+  }
+}
+}

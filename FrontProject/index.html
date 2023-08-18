@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+    <link rel="shortcut icon" href="assets/images/icon-darkback-12801280-360x360.png" type="image/x-icon">
+    <meta name="description" content="">
+
+
+    <title>Cheelee Roulette</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap-grid.min.css">
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap-reboot.min.css">
+    <link rel="stylesheet" href="assets/parallax/jarallax.css">
+    <link rel="stylesheet" href="roulette.css">
+    <link rel="stylesheet" href="assets/popup-overlay-plugin/style.css">
+    <link rel="stylesheet" href="assets/theme/css/style.css">
+    <link rel="stylesheet" href="assets/recaptcha.css">
+    <link rel="preload"
+        href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700,800,900,100i,200i,300i,400i,500i,600i,700i,800i,900i&display=swap"
+        as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700,800,900,100i,200i,300i,400i,500i,600i,700i,800i,900i&display=swap">
+    </noscript>
+    <link rel="preload" as="style" href="assets/mobirise/css/mbr-additional.css">
+    <link rel="stylesheet" href="assets/mobirise/css/mbr-additional.css" type="text/css">
+</head>
+
+<body>
+    <section data-bs-version="5.1" class="header1 elevatem5 cid-tK0c7IDc5h mbr-fullscreen mbr-parallax-background"
+        id="header1-0">
+        <div class="mbr-overlay" style="opacity: 0.2; background-color: rgb(0, 0, 0);">
+        </div>
+
+        <div class="container-fluid">
+            <div class="row">
+                <center> <img class="image_logo" src="assets/images/icon-noBack-forDarkBack-1280х1280.png" alt="">
+                    <center><br>
+                        <div class="col-12">
+                            <div class="title-wrapper">
+                                <img class="image_1" src="assets/images/-1-360x360.png" alt="">
+
+
+                                <div class="title-wrap">
+
+                                    <div class="text-wrap">
+                                        <p class="mbr-text mbr-fonts-style display-2">Смотри. Играй</p><strong>
+                                            <nobr>
+                                                <h1 class="rainbow">ЗАРАБАТЫВАЙ</h1>
+                                            </nobr>
+                                        </strong>
+                                        <br><br><br>
+                                        <div class="mbr-section-btn">
+
+                                            <div class="container">
+                                                <span class="loader"></span>
+
+                                            </div>
+
+
+                                        </div><br><br><br><br><br><br>
+                                        <p class="mbr-desc mbr-fonts-style display-4">
+                                            <strong>AVAILABLE ON<br>GOOGLE APP AND APP STORE</strong>
+                                        </p>
+                                        <button id="post-btn" style="
+                                            width: 300px;
+                                            height: 100px;
+                                            background: #fff;
+                                        ">Определить победителя</button>
+                                    </div>
+
+                                </div>
+                                <img class="image_3" src="assets/images/mn-1-360x360.png" alt="">
+                                <img class="image_4" src="assets/images/-360x360.png" alt="">
+
+                            </div>
+                        </div>
+                        <br><br>
+            </div><br><br>
+        </div>
+    </section>
+
+    <div class="modal mbr-popup cid-tL0yNiKdlq fade" id="PopUpOverlay" tabindex="-1" role="dialog"
+        data-overlay-color="#000000" data-overlay-opacity="0.8" data-on-timer-delay="1" id="mbr-popup-1"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="container position-static margin-center-pos">
+                    <div class="modal-header pb-0">
+                        <h5 class="modal-title mbr-fonts-style display-5">ПОБЕДИТЕЛЬ КОНКУРСА</h5>
+                        <button type="button" class="close d-flex" data-dismiss="modal" data-bs-dismiss="modal"
+                            aria-label="Close">
+                            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="23" height="23"
+                                viewBox="0 0 23 23" fill="currentColor">
+                                <path
+                                    d="M13.4 12l10.3 10.3-1.4 1.4L12 13.4 1.7 23.7.3 22.3 10.6 12 .3 1.7 1.7.3 12 10.6 22.3.3l1.4 1.4L13.4 12z">
+                                </path>
+                            </svg>
+                        </button>
+                    </div>
+
+                    <div class="modal-body">
+                        <p class="mbr-text mbr-fonts-style display-7" id="winner"></p>
+
+                        <div>
+                            <div class="card-img mbr-figure">
+                                <img src="assets/images/mn-808x808.png" alt="">
+                            </div>
+
+
+
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/parallax/jarallax.js"></script>
+    <script src="assets/smoothscroll/smooth-scroll.js"></script>
+    <script src="assets/ytplayer/index.js"></script>
+    <script src="assets/popup-plugin/script.js"></script>
+    <!--<script src="assets/popup-ontimer-plugin/script.js"></script>-->
+    <script src="assets/popup-overlay-plugin/script.js"></script>
+    <script src="assets/theme/js/script.js"></script>
+    <script src="assets/formoid.min.js"></script>
+
+    <script>
+        function showPopup(popupId) {
+            var popupElement = document.getElementById(popupId);
+            if (popupElement) {
+                var popupInstance;
+                if (typeof bootstrap !== 'undefined') {
+                    if (typeof bootstrap.Modal.getInstance !== 'undefined') {
+                        popupInstance = bootstrap.Modal.getInstance(popupElement);
+                    }
+                    if (!popupInstance) {
+                        popupInstance = new bootstrap.Modal(popupElement, {
+                            keyboard: false
+                        });
+                    }
+                    popupInstance.show();
+                    // Запускаем таймер после отображения модального окна
+                    startTimer();
+                } else if (typeof jQuery !== 'undefined') {
+                    $(popupElement).modal({
+                        keyboard: false
+                    });
+                    // Запускаем таймер после отображения модального окна
+                    startTimer();
+                }
+            }
+        }
+
+        function startTimer() {
+            var timeout = 1000 * 60 * 15;
+            setTimeout(function () {
+                var modalContentElement = document.getElementsByClassName("modal-content")[0];
+                if (modalContentElement) {
+                    modalContentElement.style.display = "none";
+                    console.log("closed")
+                }
+            }, timeout);
+        }
+
+        function poll() {
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', 'poll.php', true);
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    var user = JSON.parse(req.responseText);
+                    if (typeof user.username != "undefined") {
+                        document.getElementById("winner").innerHTML = user[1].fullName + "<br>" + user[0].username;
+                    }
+                }
+                xhr.send();
+            }
+        }
+
+        const button = document.getElementById('post-btn');
+        button.addEventListener('click', async _ => {  
+            const response = await fetch('http://localhost:3000/getwinner', {method: 'post', mode: "cors", headers: {'Content-Type': 'application/json'}});
+            console.log(response);
+            // document.getElementById("post-btn").innerHTML = user.username
+        });
+
+        // function gen_winner() {
+        //     var xhr = new XMLHttpRequest();
+        //     xhr.open('POST', 'http://localhost/getwinner');
+        //     xhr.onreadystatechange = function () {
+        //         if (xhr.readyState == 4 && xhr.status == 200) {
+        //             var user = JSON.parse(req.responseText);
+        //             alert(JSON.stringify(user))
+        //             if (typeof user.username != "undefined") {
+        //                 document.getElementById("winner").innerHTML = user[1].fullName + "<br>" + user[0].username;
+        //             }
+        //         }
+        //         xhr.send();
+        //     }
+        // }
+
+        document.getElementById("winner").innerHTML = "TestNick<br>Tag";
+
+        // showPopup("PopUpOverlay")
+
+    </script>
+
+
+</body>
+
+</html>
