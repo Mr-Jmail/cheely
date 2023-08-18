@@ -10,7 +10,6 @@
     <link rel="shortcut icon" href="assets/images/icon-darkback-12801280-360x360.png" type="image/x-icon">
     <meta name="description" content="">
 
-
     <title>Cheelee Roulette</title>
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap-grid.min.css">
@@ -87,25 +86,17 @@
 
                     <div class="modal-body">
                         <p class="mbr-text mbr-fonts-style display-7" id="winner"></p>
-
                         <div>
                             <div class="card-img mbr-figure">
                                 <img src="assets/images/mn-808x808.png" alt="">
                             </div>
-
-
-
                         </div>
                     </div>
-
-                    <div class="modal-footer">
-
-                    </div>
+                    <div class="modal-footer"></div>
                 </div>
             </div>
         </div>
     </div>
-
 
     <script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="assets/parallax/jarallax.js"></script>
@@ -171,9 +162,8 @@
 
         const button = document.getElementById('post-btn');
         button.addEventListener('click', async _ => {  
-            const response = await fetch('http://localhost:3000/getwinner', {method: 'post', mode: "cors", headers: {'Content-Type': 'application/json'}});
+            const response = await fetch('http://localhost:3000/getwinner', {method: 'post'});
             console.log(response);
-            // document.getElementById("post-btn").innerHTML = user.username
         });
 
         // function gen_winner() {
