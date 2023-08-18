@@ -40,7 +40,7 @@ app.post("/getwinner", urlencodedParser, function (req, res) {
                 winners.push(formatedWinner);
             }
             console.log(winners);
-            res.send({winners})
+            res.send(winners)
         })
     })
 });
