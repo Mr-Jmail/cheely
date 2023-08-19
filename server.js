@@ -23,8 +23,7 @@ app.post("/genwinner", urlencodedParser, async function (req, res) {
     var participants = await genWinner(3); // 0й индекс - победитель
     res.send(participants)
     await pushWinnersToBd(participants);
-    var winners = await getWinners() // 0й индекс - победитель
-    console.log(winners[0].username);
+    console.log(await getWinners());
 });
 
 async function genWinner(numberOfParticipantToDisplay) {
@@ -62,10 +61,12 @@ async function pushWinnersToBd(winners) {
         pool.getConnection(function (err, conn) {
             if (err) reject(err);
             try {
-                var queryString = "INSERT INTO winners (username, fullName) VALUES "
-                winners.forEach(winner => queryString += `('${winner.username}', '${winner.fullName}'), `)
-                queryString = queryString.substring(0, queryString.length - 2) + ";"
-                conn.query(queryString, async (err, winners) => {
+                var queryString = "INSERT INTO winners (username, fullName, isWinner) VALUES "
+                for(var i = 0; i < winners.length; i++) {
+                    queryString += `('${winners[i].username}', '${winners[i].fullName}', '${i == 0 ? "1" : "0"}') ${i == winners.length - 1 ? "" :  ", "}`
+                }
+                conn.query("DELETE FROM winners winners", async (err) => {if(err) reject(err)});
+                conn.query(queryString, async (err) => {
                     if (err) reject(err)
                     conn.release();
                     resolve()
@@ -82,7 +83,7 @@ async function getWinners() {
         pool.getConnection(function (err, conn) {
             if (err) reject(err);
             try {
-                conn.query("SELECT * FROM winners", async (err, winners) => {
+                conn.query("SELECT * FROM winners ORDER by -isWinner", async (err, winners) => {
                     if (err) reject(err)
                     conn.release();
                     resolve(winners)
