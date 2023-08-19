@@ -1,4 +1,4 @@
-const { Telegraf, Telegram } = require("telegraf");
+const { Telegraf } = require("telegraf");
 const bot = new Telegraf("5589950553:AAHiC9FCN1Z-uh2GISlJbwFdijeTssKmC1M");
 const express = require("express");
 const cors = require('cors');
