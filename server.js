@@ -5,11 +5,9 @@ const cors = require('cors');
 const app = express();
 var channelId = -1001616084901;
 const bodyParser = require("body-parser");
-
-app.use(cors());
-
 const pool = require("./bd_config.js")
 
+app.use(cors());
 
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
 
