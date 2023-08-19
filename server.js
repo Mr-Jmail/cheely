@@ -3,13 +3,13 @@ const bot = new Telegraf("5589950553:AAHiC9FCN1Z-uh2GISlJbwFdijeTssKmC1M");
 const express = require("express");
 const cors = require('cors');
 const app = express();
+var channelId = -1001616084901;
 const bodyParser = require("body-parser");
 
 app.use(cors());
 
 const pool = require("./bd_config.js")
 
-var channelId = -1001616084901;
 
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
 
