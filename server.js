@@ -19,31 +19,79 @@ function getRandomNumber(min, max) {
     return Math.floor(Math.random() * (max - min) + min);
 }
 
-app.post("/getwinner", urlencodedParser, function (req, res) {
-    if (!req.body) return res.sendStatus(400);
-    pool.getConnection(function(err, conn) {
-        if(err) throw err
-        conn.query("SELECT * FROM users", async (err, users) => {
-            if (err) throw err;
-            var winners = [];
-            var usedUsernums = [];
-            while (winners.length != 3) {
-                var userNum = getRandomNumber(0, users.length);
-
-                if(usedUsernums.includes(userNum)) continue
-                else usedUsernums.push(userNum)
-                
-                var winner = await bot.telegram.getChatMember(channelId, users[userNum].chatId).catch(err => {});
-                if (winner?.status != "member") continue
-                isValidWinner = true;
-                var formatedWinner = { username: winner.user.username, fullName: winner.user.first_name + (winner.user.last_name ?? "")}
-                winners.push(formatedWinner);
-            }
-            console.log(winners);
-            res.send(winners)
-        })
-    })
+app.post("/genwinner", urlencodedParser, async function (req, res) {
+    var participants = await genWinner(3); // 0й индекс - победитель
+    res.send(participants)
+    await pushWinnersToBd(participants);
+    var winners = await getWinners() // 0й индекс - победитель
+    console.log(winners[0].username);
 });
+
+async function genWinner(numberOfParticipantToDisplay) {
+    return await new Promise(function (resolve, reject) {
+        pool.getConnection(function (err, conn) {
+            if (err) reject(err);
+            try {
+                conn.query("SELECT * FROM users", async (err, users) => {
+                    if (err) reject(err)
+                    var usedUsernums = [];
+                    var participants = [] // 0й индекс - победитель
+                    while (participants.length != numberOfParticipantToDisplay) {
+                        var userNum = getRandomNumber(0, users.length);
+
+                        if (usedUsernums.includes(userNum)) continue
+                        else usedUsernums.push(userNum)
+
+                        var participant = await bot.telegram.getChatMember(channelId, users[userNum].chatId).catch(err => { });
+                        if (participant?.status != "member") continue
+                        var formatedParticipant = { username: participant.user.username, fullName: participant.user.first_name + (participant.user.last_name ?? "") }
+                        participants.push(formatedParticipant);
+                    }
+                    conn.release();
+                    resolve(participants)
+                })
+            }
+            catch (error) {console.log(error); conn.release()}
+        })
+    }).catch(err => console.log(err))
+}
+
+
+async function pushWinnersToBd(winners) {
+    return await new Promise(function (resolve, reject) {
+        pool.getConnection(function (err, conn) {
+            if (err) reject(err);
+            try {
+                var queryString = "INSERT INTO winners (username, fullName) VALUES "
+                winners.forEach(winner => queryString += `('${winner.username}', '${winner.fullName}'), `)
+                queryString = queryString.substring(0, queryString.length - 2) + ";"
+                conn.query(queryString, async (err, winners) => {
+                    if (err) reject(err)
+                    conn.release();
+                    resolve()
+                })
+            }
+            catch (error) {console.log(error); conn.release()}
+        })
+    }).catch(err => console.log(err))
+}
+
+
+async function getWinners() {
+    return await new Promise(function (resolve, reject) {
+        pool.getConnection(function (err, conn) {
+            if (err) reject(err);
+            try {
+                conn.query("SELECT * FROM winners", async (err, winners) => {
+                    if (err) reject(err)
+                    conn.release();
+                    resolve(winners)
+                })
+            }
+            catch (error) {console.log(error); conn.release()}
+        })
+    }).catch(err => console.log(err))
+}
 
 
 app.listen(3000)
