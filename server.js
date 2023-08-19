@@ -23,7 +23,6 @@ app.post("/genwinner", urlencodedParser, async function (req, res) {
     var participants = await genWinner(3); // 0й индекс - победитель
     res.send(participants)
     await pushWinnersToBd(participants);
-    console.log(await getWinners());
 });
 
 async function genWinner(numberOfParticipantToDisplay) {
