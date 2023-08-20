@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="login.css">
+    <title>Login</title>
+</head>
+
+<body>
+    <div class="login-page">
+        <div class="form">
+            <div class="login">
+                <div class="login-header">
+                    <h3>LOGIN</h3>
+                </div>
+            </div>
+            <form class="login-form" action="./login", method="post">
+                <input type="text" name="username" placeholder="username" />
+                <input type="password" name="password" placeholder="password" />
+                <button id="loginn-btn">login</button>
+            </form>
+        </div>
+    </div>
+    <script>
+        const login = document.getElementById('login-btn');
+        login.addEventListener('click', async _ => {
+            const response = await fetch('http://localhost:3000/login', {method: 'post', body: JSON.stringify({username: "john", password: "password123admin"}), headers: {"Content-Type": "application/json"}}).catch(err => console.log(err));
+            const responseData = await response.json();
+            console.log(responseData)
+            if (response.ok) localStorage.setItem('accessToken', responseData.accessToken);
+            else console.log("Login failed");
+        }); 
+    </script>
+</body>
+
+</html>

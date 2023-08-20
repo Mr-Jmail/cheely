@@ -6,10 +6,15 @@ const app = express();
 var channelId = -1001616084901;
 const bodyParser = require("body-parser");
 const pool = require("./bd_config.js")
+const jwt = require('jsonwebtoken');
+var path = require("path")
+
+const accessTokenSecret = 'youraccesstokensecret'
 
 app.use(cors());
 
-var urlencodedParser = bodyParser.urlencoded({ extended: false });
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
 app.use(express.json());
 
@@ -17,7 +22,56 @@ function getRandomNumber(min, max) {
     return Math.floor(Math.random() * (max - min) + min);
 }
 
-app.post("/genwinner", urlencodedParser, async function (req, res) {
+app.use(express.static(path.join(__dirname, "FrontProject")))
+
+app.get("/login", (req, res) => {
+    res.sendFile(path.join(__dirname, "FrontProject", "login.html"))
+})
+
+app.get("/", (req, res) => {
+    res.sendFile(path.join(__dirname, "FrontProject", "index.html"))
+})
+
+app.post('/login', async (req, res) => {
+    const { username, password } = req.body;
+    var admin = await new Promise(async (resolve, reject) => {
+        pool.getConnection(function (err, conn) {
+            try {
+                conn.query(`SELECT * FROM admins WHERE username LIKE '${username}' AND password LIKE '${password}'`, function(err, admins) {
+                    if(err) reject(err);
+                    conn.release()
+                    resolve(admins[0] ?? undefined)
+                })
+            } 
+            catch (error) {
+                conn.release()
+                console.log(error);    
+            }
+        })
+    })
+    console.log(admin);
+    if(!admin) return res.send('Username or password incorrect');
+    const accessToken = jwt.sign({ username: admin.username}, accessTokenSecret);
+    if(accessToken) res.redirect("/")
+});
+
+
+function authenticateJWT(req, res, next) {
+    const authHeader = req.headers.authorization;
+    if(!authHeader) return res.sendStatus(401);
+    const token = authHeader.split(' ')[1];
+
+    jwt.verify(token, accessTokenSecret, (err, user) => {
+        if (err) return res.sendStatus(403);
+        req.user = user;
+        next();
+    });
+};
+
+
+app.post("/genwinner", authenticateJWT, async function (req, res) {
+    const user = req.user
+    console.log(user);
     var participants = await genWinner(3); // 0й индекс - победитель
     res.send(participants)
     await pushWinnersToBd(participants);

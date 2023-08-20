@@ -52,7 +52,8 @@
                                         <p class="mbr-desc mbr-fonts-style display-4">
                                             <strong>AVAILABLE ON<br>GOOGLE APP AND APP STORE</strong>
                                         </p>
-                                        <button id="post-btn" style="width: 300px;height: 100px;background: #fff;">Определить победителя</button>
+                                        <button id="login-btn" style="width: 300px;height: 100px;background: #fff;">Login</button>
+                                        <button id="genWinner-btn" style="width: 300px;height: 100px;background: #fff;">Определить победителя</button>
                                         <div id="winners"></div>
                                     </div>
                                 </div>
@@ -161,29 +162,11 @@
             }
         }
 
-        const button = document.getElementById('post-btn');
-        button.addEventListener('click', async _ => {  
-            const response = await fetch('http://localhost:3000/getwinner', {method: 'post'});
-            console.log(response);
+        const genWinner = document.getElementById('genWinner-btn');
+        genWinner.addEventListener('click', async _ => {  
+            const accessToken = localStorage?.getItem('accessToken');
+            const response = await fetch('http://localhost:3000/genwinner', {method: 'post', headers: {"Authorization": "Bearer " + accessToken}});
         });
-
-        // function gen_winner() {
-        //     var xhr = new XMLHttpRequest();
-        //     xhr.open('POST', 'http://localhost/getwinner');
-        //     xhr.onreadystatechange = function () {
-        //         if (xhr.readyState == 4 && xhr.status == 200) {
-        //             var user = JSON.parse(req.responseText);
-        //             alert(JSON.stringify(user))
-        //             if (typeof user.username != "undefined") {
-        //                 document.getElementById("winner").innerHTML = user[1].fullName + "<br>" + user[0].username;
-        //             }
-        //         }
-        //         xhr.send();
-        //     }
-        // }
-
-        document.getElementById("winner").innerHTML = "TestNick<br>Tag";
-
         // showPopup("PopUpOverlay")
 
     </script>
