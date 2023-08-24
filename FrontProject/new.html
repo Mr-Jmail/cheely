@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+    <link rel="shortcut icon" href="assets/images/icon-darkback-12801280-360x360.png" type="image/x-icon">
+
+    <link rel="stylesheet" href="roulette2.css">
+
+
+    <title>Cheelee Roulette</title>
+
+</head>
+
+<body>
+    <section class="background">
+        <div class="div_logo">
+            <img class="image_logo" src="assets/images/icon-noBack-forDarkBack-1280х1280.png" alt="">
+        </div>
+        <p class="text-top">Смотри. Играй</p><strong>
+            <nobr>
+                <h1 class="rainbow">ЗАРАБАТЫВАЙ</h1>
+            </nobr>
+        </strong>
+      
+
+        <div id="animation">
+        <div class="line" id="line"></div>
+
+        <div class="animation-block" >
+            <div class="user_background" win='true'>
+                <h5 class="user-title">ПОБЕДИТЕЛЬ КОНКУРСА</h5>
+                <p class="user-text" id="winner">TestNick1<br>Tag</p>
+                <div class="user-block-img">
+                    <img class="user-img" src="assets/images/mn-808x808.png" alt="">
+                </div>
+            </div>
+
+            <div class="user_background">
+                <h5 class="user-title">ПОБЕДИТЕЛЬ КОНКУРСА</h5>
+                <p class="user-text" id="winner">TestNick<br>Tag</p>
+                <div class="user-block-img">
+                    <img class="user-img" src="assets/images/mn-808x808.png" alt="">
+                </div>
+            </div>
+
+            <div class="user_background">
+                <h5 class="user-title">ПОБЕДИТЕЛЬ КОНКУРСА</h5>
+                <p class="user-text" id="winner">TestNick<br>Tag</p>
+                <div class="user-block-img">
+                    <img class="user-img" src="assets/images/mn-808x808.png" alt="">
+                </div>
+            </div>
+
+            <div class="user_background">
+                <h5 class="user-title">ПОБЕДИТЕЛЬ КОНКУРСА</h5>
+                <p class="user-text" id="winner">TestNick<br>Tag</p>
+                <div class="user-block-img">
+                    <img class="user-img" src="assets/images/mn-808x808.png" alt="">
+                </div>
+            </div>
+
+            <div class="user_background">
+                <h5 class="user-title">ПОБЕДИТЕЛЬ КОНКУРСА</h5>
+                <p class="user-text" id="winner">TestNick<br>Tag</p>
+                <div class="user-block-img">
+                    <img class="user-img" src="assets/images/mn-808x808.png" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="post-btn" class="button-an">Определить
+        победителя</div>
+        <!-- <div class="line-canvas" id="line">
+            <canvas id="canvas"></canvas>
+        </div> -->
+        <!-- <img class="image_3" src="assets/images/mn-1-360x360.png" alt=""> -->
+        <img class="image_4" src="assets/images/-360x360.png" alt="">
+        <p class="text-bottom">
+            <strong>AVAILABLE ON<br>GOOGLE APP AND APP STORE</strong>
+        </p>
+    </section>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+
+    <script>
+        const HOST = "https://nodejs.helpervk.ru/";
+
+
+
+
+
+function isCollide(a, b) {
+    var aRect = a.getBoundingClientRect();
+    var bRect = b.getBoundingClientRect();
+
+    return !(
+        ((aRect.top + aRect.height) < (bRect.top)) ||
+        (aRect.top > (bRect.top + bRect.height)) ||
+        ((aRect.left + aRect.width) < bRect.left) ||
+        (aRect.left > (bRect.left + bRect.width))
+    );
+}
+
+let user_background = document.getElementsByClassName("user_background");
+
+
+let user_backgroundRect = user_background[0].getBoundingClientRect();
+let line = document.getElementsByClassName("line")[0];
+
+line.style.height = user_backgroundRect.height + 'px';
+
+var distance_el = 50;
+
+var distance = user_backgroundRect.width + distance_el;
+
+var speed = 15;
+
+var width = $(window).width();
+
+let users = Math.floor(width/distance);
+    console.log(users)
+
+let left = width/users;
+
+const accessToken = localStorage.getItem("accessToken");
+if (accessToken) {
+    document.getElementById("animation").style.display = "none";
+    document.getElementById("post-btn").style.display = "block";
+} else {
+    document.getElementById("line").style.display = "none";
+    document.getElementById("post-btn").style.display = "none";
+    for (let i=0; i<users; i++) {
+        if (i==0) {
+            user_background[i].style.left = distance_el/2+'px';
+        } else {
+            user_background[i].style.left = (i)*left+distance_el/2+'px';
+        }
+    }
+}
+
+
+        function animateLeft(obj, from, i){
+
+               if(from >= (width+10)) {    
+    obj.style.left =  -left*((user_background.length))+users*left+"px";
+    setTimeout(function(){
+           animateLeft(obj, -left*((user_background.length))+users*left, i);
+       }, 1) 
+   }
+   else {
+       obj.style.left = from + "px";
+       setTimeout(function(){
+           animateLeft(obj, from + speed, i);
+       }, 1)
+   }
+
+            if (speed <=0 ) {
+                    return;
+                }
+
+            if (isCollide(obj, line)) {
+                console.log(obj.getAttribute('win'))
+                if (obj.getAttribute('win') == "true") {
+                    speed = speed-0.09;
+                }
+                line.style.background = "#5d75a9"
+            } else {
+                line.style.background = "#994e9b"
+
+            }
+}
+
+
+
+        const button = document.getElementById('post-btn');
+
+        button.addEventListener('click', async _ => {
+
+            console.log(111);
+
+            document.getElementById("post-btn").style.display = "none";
+
+            document.getElementById("animation").style.display = "block";
+
+
+            for (let i=0; i<user_background.length; i++) {
+    console.log(left)
+    user_background[i].style.left = (i+1)*left+'px';
+    animateLeft(user_background[i], -(i+1)*left, (i+1));
+
+}
+
+
+            // let response = await fetch(HOST + 'getwinner', {
+            //     method: 'POST',
+            // });
+            // if (response.ok) {
+            //     let json = await response.json();
+            //     console.log(json);
+            // }
+
+        });
+
+        // function gen_winner() {
+        //     var xhr = new XMLHttpRequest();
+        //     xhr.open('POST', 'http://localhost/getwinner');
+        //     xhr.onreadystatechange = function () {
+        //         if (xhr.readyState == 4 && xhr.status == 200) {
+        //             var user = JSON.parse(req.responseText);
+        //             alert(JSON.stringify(user))
+        //             if (typeof user.username != "undefined") {
+        //                 document.getElementById("winner").innerHTML = user[1].fullName + "<br>" + user[0].username;
+        //             }
+        //         }
+        //         xhr.send();
+        //     }
+        // }
+
+       
+
+         //showPopup("PopUpOverlay")
+
+    </script>
+
+
+</body>
+
+</html>

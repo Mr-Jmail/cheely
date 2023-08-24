@@ -14,22 +14,24 @@
                     <h3>LOGIN</h3>
                 </div>
             </div>
-            <form class="login-form" action="./login", method="post">
-                <input type="text" name="username" placeholder="username" />
-                <input type="password" name="password" placeholder="password" />
-                <button id="loginn-btn">login</button>
-            </form>
+            <forms class="login-form">
+                <input type="text" id="username" name="username" placeholder="username" />
+                <input type="password" id="password" name="password" placeholder="password" />
+                <button onclick="GoLogin()" id="loginn-btn">login</button>
+            </forms>
         </div>
     </div>
-    <script>
+    <script defer>
+        const HOST = "https://nodejs.helpervk.ru/"
         const login = document.getElementById('login-btn');
-        login.addEventListener('click', async _ => {
-            const response = await fetch('http://localhost:3000/login', {method: 'post', body: JSON.stringify({username: "john", password: "password123admin"}), headers: {"Content-Type": "application/json"}}).catch(err => console.log(err));
+        async function GoLogin() {
+            const response = await fetch(HOST+'login', {method: 'post', body: JSON.stringify({username: document.getElementById("username").value, password: document.getElementById("password").value}), headers: {"Content-Type": "application/json"}}).catch(err => console.log(err));
             const responseData = await response.json();
             console.log(responseData)
             if (response.ok) localStorage.setItem('accessToken', responseData.accessToken);
             else console.log("Login failed");
-        }); 
+        }; 
+
     </script>
 </body>
 
