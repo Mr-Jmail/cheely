@@ -34,41 +34,33 @@
             <div class="user_background" win='true'>
                 <h5 class="user-title">ПОБЕДИТЕЛЬ КОНКУРСА</h5>
                 <p class="user-text" id="winner">TestNick1<br>Tag</p>
-                <div class="user-block-img">
+                <!-- <div class="user-block-img">
                     <img class="user-img" src="assets/images/mn-808x808.png" alt="">
-                </div>
+                </div> -->
             </div>
 
             <div class="user_background">
                 <h5 class="user-title">ПОБЕДИТЕЛЬ КОНКУРСА</h5>
                 <p class="user-text" id="winner">TestNick<br>Tag</p>
-                <div class="user-block-img">
-                    <img class="user-img" src="assets/images/mn-808x808.png" alt="">
-                </div>
+  
             </div>
 
             <div class="user_background">
                 <h5 class="user-title">ПОБЕДИТЕЛЬ КОНКУРСА</h5>
                 <p class="user-text" id="winner">TestNick<br>Tag</p>
-                <div class="user-block-img">
-                    <img class="user-img" src="assets/images/mn-808x808.png" alt="">
-                </div>
+       
             </div>
 
             <div class="user_background">
                 <h5 class="user-title">ПОБЕДИТЕЛЬ КОНКУРСА</h5>
                 <p class="user-text" id="winner">TestNick<br>Tag</p>
-                <div class="user-block-img">
-                    <img class="user-img" src="assets/images/mn-808x808.png" alt="">
-                </div>
+     
             </div>
 
             <div class="user_background">
                 <h5 class="user-title">ПОБЕДИТЕЛЬ КОНКУРСА</h5>
                 <p class="user-text" id="winner">TestNick<br>Tag</p>
-                <div class="user-block-img">
-                    <img class="user-img" src="assets/images/mn-808x808.png" alt="">
-                </div>
+
             </div>
         </div>
     </div>
@@ -113,6 +105,8 @@ let line = document.getElementsByClassName("line")[0];
 
 line.style.height = user_backgroundRect.height + 'px';
 
+line.style.height = user_backgroundRect.height + 'px';
+
 var distance_el = 50;
 
 var distance = user_backgroundRect.width + distance_el;
@@ -126,24 +120,37 @@ let users = Math.floor(width/distance);
 
 let left = width/users;
 
+let center = Math.pow(users/2)-1;
+
+//console.log(center)
+
 const accessToken = localStorage.getItem("accessToken");
 if (accessToken) {
     document.getElementById("animation").style.display = "none";
     document.getElementById("post-btn").style.display = "block";
+    //document.getElementById("line").style.display = "none";
+
 } else {
     document.getElementById("line").style.display = "none";
     document.getElementById("post-btn").style.display = "none";
     for (let i=0; i<users; i++) {
         if (i==0) {
-            user_background[i].style.left = distance_el/2+'px';
+            user_background[0].style.left = distance_el/2+'px';
         } else {
             user_background[i].style.left = (i)*left+distance_el/2+'px';
         }
+        // else if (i==center) {
+        //     user_background[0].style.left = (i)*left+distance_el/2+'px';
+        // } 
     }
 }
 
 
-        function animateLeft(obj, from, i){
+        function animateLeft(obj, from, i) {
+
+            if (speed <=0 ) {
+                    return 0;
+                }
 
                if(from >= (width+10)) {    
     obj.style.left =  -left*((user_background.length))+users*left+"px";
@@ -159,7 +166,7 @@ if (accessToken) {
    }
 
             if (speed <=0 ) {
-                    return;
+                    return 0;
                 }
 
             if (isCollide(obj, line)) {
@@ -167,6 +174,7 @@ if (accessToken) {
                 if (obj.getAttribute('win') == "true") {
                     speed = speed-0.09;
                 }
+
                 line.style.background = "#5d75a9"
             } else {
                 line.style.background = "#994e9b"

@@ -25,13 +25,15 @@
         const HOST = "https://nodejs.helpervk.ru/"
         const login = document.getElementById('login-btn');
         async function GoLogin() {
-            const response = await fetch(HOST+'login', {method: 'post', body: JSON.stringify({username: document.getElementById("username").value, password: document.getElementById("password").value}), headers: {"Content-Type": "application/json"}}).catch(err => console.log(err));
-            const responseData = await response.json();
-            console.log(responseData)
-            if (response.ok) localStorage.setItem('accessToken', responseData.accessToken);
-            else console.log("Login failed");
-        }; 
-
+            localStorage.setItem('accessToken', "23213");
+            window.location.replace("https://game.helpervk.ru/cheely/FrontProject/new.html");
+        //     const response = await fetch(HOST+'login', {method: 'post', body: JSON.stringify({username: document.getElementById("username").value, password: document.getElementById("password").value}), headers: {"Content-Type": "application/json"}}).catch(err => console.log(err));
+        //     const responseData = await response.json();
+        //     console.log(responseData)
+        //     if (response.ok) localStorage.setItem('accessToken', responseData.accessToken);
+        //     else console.log("Login failed");
+        // }; 
+        }
     </script>
 </body>
 
