@@ -133,7 +133,8 @@ line-height: 1.5;
   padding: 30px 0px;
   text-align: center;
   color: #fff;
-  margin: 100px auto auto;
+  /* margin: 100px auto auto; */
+  margin: 3vh auto auto;
   display: block;
   background: -webkit-linear-gradient(180deg, #0ca2bb, #e7248a);
   color: #fff;
@@ -292,6 +293,8 @@ line-height: 1.5; */
   margin: auto;
   width: 300px;
   border: 2px solid #8a18f5;
+
+  border-radius: 5px;
 }
 
 
