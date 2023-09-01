@@ -99,6 +99,15 @@ line-height: 1.5;
   transition: all 8s cubic-bezier(.08,.6,0,1);
 }
 
+.raffle-roller-container2 {
+  height: 9999999999999999999px;
+  max-height: 999999999999999999px;
+  width: 100px;
+  background: #191726;
+  margin: auto;
+  transition: all 8s cubic-bezier(.08,.6,0,1);
+}
+
 
 .item {
   margin: 0px 0px 0.5px 5px;

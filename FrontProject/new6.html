@@ -29,27 +29,7 @@
 
         <div id="animation">
             <div class="animation-block">
-                <div class="background_lottery">
-                    <!-- <div class="lottery-top">
-                        <ul>
-                            <li>TestNick1</li>
-                        </ul>
-                    </div> -->
-                    <div id="lottery">
-                        <ul style="top: -500px;">
-
-                            <li>TestNick1312</li>
-                            <li>TestNick1</li>
-                            <li>TestNick</li>
-                            <li>TestNick1</li>
-                            <li>TestNick1</li>
-                            <li>TestNick11111</li>
-                        </ul>
-                    </div>
-                    <!-- <div class="lottery-bottom">
-                        <ul style="top: -100px;">
-                        </ul>
-                    </div> -->
+                <div class="raffle-roller-container2" style="margin-bottom: 0px;">
                 </div>
             </div>
 
@@ -71,11 +51,6 @@
     <script defer>
         const HOST = "https://nodejs.helpervk.ru/";
 
-        // $('#lottery ul').find('li').first();
-
-        // $('#lottery ul').appendTo(slot.$el);
-
-        $('#lottery ul').find('li').first().clone().appendTo( $('#lottery ul'));
 
 
 
@@ -95,52 +70,37 @@
             },
         ];
 
+        function generate(number) {
+            $('.raffle-roller-container2').css({
+                transition: "sdf",
+                "margin-bottom": "0px"
+            }, 10).html('');
+                for(var i = 0; i < 101; i++) {
+                    var randed = randomInt(0,items.length);
+                    var element = '<div class="item"> <h5 class="user-title" > ПОБЕДИТЕЛЬ КОНКУРСА</h5 > <p class="user-text"  id="CardNumber'+i+'">' + items[randed].username + '<br>' + items[randed].tag + '</p><div class="user-block-img"><img class="user-img" src="assets/images/mn-808x808.png" alt=""></div></div>';
+                    $(element).prependTo('.raffle-roller-container2');
+                }
+            setTimeout(function () {
+                goRoll(number);
+            }, 500);
+        }
 
-        $('#post-btn').click(function () {
-            $('#lottery ul').find('li').last().remove();
-            $('#lottery ul').playSpin({
-                endNum: [1],
-                 time: 5000,
-                 loops: 3,
-                 easing: 'linear'
-                // onFinish: 1,
-                // onEnd: 1
+        function goRoll(number) {
+            $('.raffle-roller-container2').css({
+                transition: "all 13s cubic-bezier(.08,.6,0,.85)"
             });
-        });
-        //     function generate(number) {
-        //         $('.raffle-roller-container').css({
-        //             transition: "sdf",
-        //             "margin-left": "0px"
-        //         }, 10).html('');
-        //             for(var i = 0; i < 101; i++) {
-        //                 var randed = randomInt(0,items.length);
-        //                 var element = '<div class="item"> <h5 class="user-title" > ПОБЕДИТЕЛЬ КОНКУРСА</h5 > <p class="user-text"  id="CardNumber'+i+'">' + items[randed].username + '<br>' + items[randed].tag + '</p><div class="user-block-img"><img class="user-img" src="assets/images/mn-808x808.png" alt=""></div></div>';
-        //                 $(element).appendTo('.raffle-roller-container');
-        //             }
-        //         setTimeout(function () {
-        //             goRoll(number);
-        //         }, 500);
-        //     }
+    document.getElementById('CardNumber78').innerHTML = items[number].username + '<br>' + items[number].tag;
+            setTimeout(function () {
+                $('#CardNumber26').addClass('winning-item');
+            }, 8500);
 
-        //     function goRoll(number) {
-        //         $('.raffle-roller-container').css({
-        //             transition: "all 13s cubic-bezier(.08,.6,0,.85)"
-        //         });
-        // document.getElementById('CardNumber78').innerHTML = items[number].username + '<br>' + items[number].tag;
-        //         setTimeout(function () {
-        //             $('#CardNumber26').addClass('winning-item');
-        //         }, 8500);
-
-        //         $('.raffle-roller-container').css('margin-left', '-6770px');
-        //     }
-
-
-
-
+            $('.raffle-roller-container2').css('margin-bottom', '-6770px');
+        }
         function randomInt(min, max) {
             return Math.floor(Math.random() * (max - min)) + min;
         }
 
+       // generate(0);
 
 
 
@@ -206,13 +166,13 @@
 
         button.addEventListener('click', async _ => {
 
-            // document.getElementById("animation").style.display = "block";
+            document.getElementById("animation").style.display = "block";
 
-            // generate(0);
+            generate(0);
 
-            // console.log(111);
+            console.log(111);
 
-            //  document.getElementById("post-btn").style.display = "none";
+             document.getElementById("post-btn").style.display = "none";
 
 
 
