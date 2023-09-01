@@ -27,8 +27,9 @@
         </strong>
 
 
-        <div id="animation">
-            <div class="animation-block">
+        <div id="animation" >
+            <div class="animation-block"> 
+                <!-- //style="display: none;" -->
                 <div class="background_lottery">
                     <!-- <div class="lottery-top">
                         <ul>
@@ -53,7 +54,7 @@
                 </div>
             </div>
 
-            <div id="post-btn" class="button-an">Определить
+            <div id="post-btn" class="button-an" >Определить
                 победителя</div>
             <!-- <div class="line-canvas" id="line">
             <canvas id="canvas"></canvas>
@@ -78,7 +79,7 @@
         $('#lottery ul').find('li').first().clone().appendTo( $('#lottery ul'));
 
 
-
+        $('.text-bottom').css('display', 'none')
 
         var items = [
             {
@@ -97,6 +98,9 @@
 
 
         $('#post-btn').click(function () {
+           // $('.animation-block').css('display', 'block')
+            //document.getElementsByClassName("animation-block")[0] = "block";
+             document.getElementById("post-btn").style.display = "none";
             $('#lottery ul').find('li').last().remove();
             $('#lottery ul').playSpin({
                 endNum: [1],
