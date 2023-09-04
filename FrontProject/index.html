@@ -4,170 +4,140 @@
 <head>
 
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
     <link rel="shortcut icon" href="assets/images/icon-darkback-12801280-360x360.png" type="image/x-icon">
-    <meta name="description" content="">
+
+    <link rel="stylesheet" href="roulette.css">
 
     <title>Cheelee Roulette</title>
-    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap-grid.min.css">
-    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap-reboot.min.css">
-    <link rel="stylesheet" href="assets/parallax/jarallax.css">
-    <link rel="stylesheet" href="roulette.css">
-    <link rel="stylesheet" href="assets/popup-overlay-plugin/style.css">
-    <link rel="stylesheet" href="assets/theme/css/style.css">
-    <link rel="stylesheet" href="assets/recaptcha.css">
-    <link rel="preload" href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700,800,900,100i,200i,300i,400i,500i,600i,700i,800i,900i&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700,800,900,100i,200i,300i,400i,500i,600i,700i,800i,900i&display=swap"></noscript>
-    <link rel="preload" as="style" href="assets/mobirise/css/mbr-additional.css">
-    <link rel="stylesheet" href="assets/mobirise/css/mbr-additional.css" type="text/css">
+
 </head>
+
 <body>
-    <section data-bs-version="5.1" class="header1 elevatem5 cid-tK0c7IDc5h mbr-fullscreen mbr-parallax-background"
-        id="header1-0">
-        <div class="mbr-overlay" style="opacity: 0.2; background-color: rgb(0, 0, 0);">
+    <section class="background">
+        <div class="div_logo">
+            <img class="image_logo" src="assets/images/icon-noBack-forDarkBack-1280х1280.png" alt="">
         </div>
-        <div class="container-fluid">
-            <div class="row">
-                <center> <img class="image_logo" src="assets/images/icon-noBack-forDarkBack-1280х1280.png" alt="">
-                    <center><br>
-                        <div class="col-12">
-                            <div class="title-wrapper">
-                                <img class="image_1" src="assets/images/-1-360x360.png" alt="">
-                                <div class="title-wrap">
-                                    <div class="text-wrap">
-                                        <p class="mbr-text mbr-fonts-style display-2">Смотри. Играй</p><strong>
-                                            <nobr>
-                                                <h1 class="rainbow">ЗАРАБАТЫВАЙ</h1>
-                                            </nobr>
-                                        </strong>
-                                        <br><br><br>
-                                        <div class="mbr-section-btn">
-                                            <div class="container">
-                                                <span class="loader"></span>
-                                            </div>
-                                        </div><br><br><br><br><br><br>
-                                        <p class="mbr-desc mbr-fonts-style display-4">
-                                            <strong>AVAILABLE ON<br>GOOGLE APP AND APP STORE</strong>
-                                        </p>
-                                        <button id="login-btn" style="width: 300px;height: 100px;background: #fff;">Login</button>
-                                        <button id="genWinner-btn" style="width: 300px;height: 100px;background: #fff;">Определить победителя</button>
-                                        <div id="winners"></div>
-                                    </div>
-                                </div>
-                                <img class="image_3" src="assets/images/mn-1-360x360.png" alt="">
-                                <img class="image_4" src="assets/images/-360x360.png" alt="">
+        <p class="text-top">Смотри. Играй</p><strong>
+            <nobr>
+                <h1 class="rainbow">ЗАРАБАТЫВАЙ</h1>
+            </nobr>
+        </strong>
 
-                            </div>
-                        </div>
-                        <br><br>
-            </div><br><br>
-        </div>
-    </section>
 
-    <div class="modal mbr-popup cid-tL0yNiKdlq fade" id="PopUpOverlay" tabindex="-1" role="dialog"
-        data-overlay-color="#000000" data-overlay-opacity="0.8" data-on-timer-delay="1" id="mbr-popup-1"
-        aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="container position-static margin-center-pos">
-                    <div class="modal-header pb-0">
-                        <h5 class="modal-title mbr-fonts-style display-5">ПОБЕДИТЕЛЬ КОНКУРСА</h5>
-                        <button type="button" class="close d-flex" data-dismiss="modal" data-bs-dismiss="modal"
-                            aria-label="Close">
-                            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="23" height="23"
-                                viewBox="0 0 23 23" fill="currentColor">
-                                <path
-                                    d="M13.4 12l10.3 10.3-1.4 1.4L12 13.4 1.7 23.7.3 22.3 10.6 12 .3 1.7 1.7.3 12 10.6 22.3.3l1.4 1.4L13.4 12z">
-                                </path>
-                            </svg>
-                        </button>
+        <div id="animation">
+            <div class="animation-block">
+                <div class="background_lottery">
+                    <div id="lottery">
+                        <ul style="top: -500px;">
+                        </ul>
                     </div>
-
-                    <div class="modal-body">
-                        <p class="mbr-text mbr-fonts-style display-7" id="winner"></p>
-                        <div>
-                            <div class="card-img mbr-figure">
-                                <img src="assets/images/mn-808x808.png" alt="">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer"></div>
                 </div>
             </div>
-        </div>
-    </div>
 
-    <script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="assets/parallax/jarallax.js"></script>
-    <script src="assets/smoothscroll/smooth-scroll.js"></script>
-    <script src="assets/ytplayer/index.js"></script>
-    <script src="assets/popup-plugin/script.js"></script>
-    <!--<script src="assets/popup-ontimer-plugin/script.js"></script>-->
-    <script src="assets/popup-overlay-plugin/script.js"></script>
-    <script src="assets/theme/js/script.js"></script>
-    <script src="assets/formoid.min.js"></script>
+            <div id="post-btn" class="button-an">Определить
+                победителя</div>
+            <img class="image_3" src="assets/images/mn-1-360x360.png" alt="">
+            <img class="image_4" src="assets/images/-360x360.png" alt="">
+            <p class="text-bottom">
+                <strong>AVAILABLE ON<br>GOOGLE APP AND APP STORE</strong>
+            </p>
+    </section>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <script src="assets/animation.js"></script>
 
-    <script>
-        function showPopup(popupId) {
-            var popupElement = document.getElementById(popupId);
-            if (popupElement) {
-                var popupInstance;
-                if (typeof bootstrap !== 'undefined') {
-                    if (typeof bootstrap.Modal.getInstance !== 'undefined') {
-                        popupInstance = bootstrap.Modal.getInstance(popupElement);
-                    }
-                    if (!popupInstance) {
-                        popupInstance = new bootstrap.Modal(popupElement, {
-                            keyboard: false
-                        });
-                    }
-                    popupInstance.show();
-                    // Запускаем таймер после отображения модального окна
-                    startTimer();
-                } else if (typeof jQuery !== 'undefined') {
-                    $(popupElement).modal({
-                        keyboard: false
-                    });
-                    // Запускаем таймер после отображения модального окна
-                    startTimer();
-                }
-            }
-        }
 
-        function startTimer() {
-            var timeout = 1000 * 60 * 15;
-            setTimeout(function () {
-                var modalContentElement = document.getElementsByClassName("modal-content")[0];
-                if (modalContentElement) {
-                    modalContentElement.style.display = "none";
-                    console.log("closed")
-                }
-            }, timeout);
-        }
+    <script defer>
+        const HOST = "https://nodejs.helpervk.ru/";
 
-        function poll() {
-            var xhr = new XMLHttpRequest();
-            xhr.open('GET', 'poll.php', true);
-            xhr.onreadystatechange = function () {
-                if (xhr.readyState == 4 && xhr.status == 200) {
-                    var user = JSON.parse(req.responseText);
-                    if (typeof user.username != "undefined") {
-                        document.getElementById("winner").innerHTML = user[1].fullName + "<br>" + user[0].username;
-                    }
-                }
-                xhr.send();
-            }
-        }
 
-        const genWinner = document.getElementById('genWinner-btn');
-        genWinner.addEventListener('click', async _ => {  
-            const accessToken = localStorage?.getItem('accessToken');
-            const response = await fetch('http://localhost:3000/genwinner', {method: 'post', headers: {"Authorization": "Bearer " + accessToken}});
+        const accessToken = localStorage.getItem("accessToken");
+
+        const button = document.getElementById('post-btn');
+
+
+        //first request
+        //get winner
+        let response = await fetch(HOST + 'getwinner', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8',
+            },
         });
-        // showPopup("PopUpOverlay")
+        if (response.ok) {
+            let users = await response.json();
+            console.log(users);
+            $("#lottery ul").prepend("<li>" + users[2].username + "</li>");
+            $("#lottery ul").prepend("<li>" + users[0].username + "</li>");
+            $("#lottery ul").prepend("<li>" + users[1].username + "</li>");
+        }
+
+        //click and secons request
+
+        button.addEventListener('click', async _ => {
+            let amount = 100;
+
+            let response = await fetch(HOST + 'genwinner', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json;charset=utf-8',
+                    'Authorization': 'application/json;charset=utf-8'
+                },
+                body: JSON.stringify(amount),
+            });
+
+            if (response.ok) {
+
+                $("#lottery ul").html("") //remove users
+
+                let users = await response.json();
+                console.log(users);
+
+                let k = 0;
+                let amountUsers = users.length - 1;
+                while (users.length < 100) {
+                    if (k > amountUsers) {
+                        k = 0;
+                    }
+                    users.push(users[k]);
+                    k++;
+                }
+
+                for (let i = 3; i < users.length - 50; i++) {
+                    $("#lottery ul").append("<li>" + users[i].username + "</li>");
+                }
+
+                $("#lottery ul").prepend("<li>" + users[2].username + "</li>");
+                $("#lottery ul").prepend("<li>" + users[0].username + "</li>");
+                $("#lottery ul").prepend("<li>" + users[1].username + "</li>");
+
+
+                for (let i = 50; i < users.length; i++) {
+                    $("#lottery ul").append("<li>" + users[i].username + "</li>");
+                }
+
+                //$('#lottery ul').find('li').first().clone().appendTo($('#lottery ul')); //last user clones first user
+
+                document.getElementById("post-btn").style.display = "none";
+
+                //$('#lottery ul').find('li').last().remove();
+
+                $('#lottery ul').playSpin({
+                    endNum: [1],
+                    time: 5000,
+                    loops: 2,
+                    easing: 'linear'
+                });
+            }
+
+        });
+
+        if (accessToken) {
+            $('.text-bottom').css('display', 'none')
+        } else {
+            document.getElementById("post-btn").style.display = "none";
+        }
 
     </script>
 
