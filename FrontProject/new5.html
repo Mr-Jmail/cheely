@@ -29,13 +29,7 @@
 
         <div id="animation">
             <div class="animation-block">
-                <!-- //style="display: none;" -->
                 <div class="background_lottery">
-                    <!-- <div class="lottery-top">
-                        <ul>
-                            <li>TestNick1</li>
-                        </ul>
-                    </div> -->
                     <div id="lottery">
                         <ul style="top: -500px;">
 
@@ -56,9 +50,6 @@
 
             <div id="post-btn" class="button-an">Определить
                 победителя</div>
-            <!-- <div class="line-canvas" id="line">
-            <canvas id="canvas"></canvas>
-        </div> -->
             <img class="image_3" src="assets/images/mn-1-360x360.png" alt="">
             <img class="image_4" src="assets/images/-360x360.png" alt="">
             <p class="text-bottom">
@@ -78,11 +69,26 @@
         const button = document.getElementById('post-btn');
 
 
+        //first request
+        //get winner
+        let response = await fetch(HOST + 'getwinner', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8',
+            },
+        });
+        if (response.ok) {
+            let users = await response.json();
+            console.log(users);
+            $("#lottery ul").prepend("<li>" + users[2].username + "</li>");
+            $("#lottery ul").prepend("<li>" + users[0].username + "</li>");
+            $("#lottery ul").prepend("<li>" + users[1].username + "</li>");
+        }
 
-        $('#lottery ul').find('li').first().clone().appendTo($('#lottery ul'));
+        //click and secons request
 
         button.addEventListener('click', async _ => {
-
+            let amount = 100;
 
             let response = await fetch(HOST + 'genwinner', {
                 method: 'POST',
@@ -90,18 +96,51 @@
                     'Content-Type': 'application/json;charset=utf-8',
                     'Authorization': 'application/json;charset=utf-8'
                 },
+                body: JSON.stringify(amount),
             });
+
             if (response.ok) {
-                let json = await response.json();
-                console.log(json);
+
+                $("#lottery ul").html("") //remove users
+
+                let users = await response.json();
+                console.log(users);
+
+                let k = 0;
+                let amountUsers = users.length - 1;
+                while (users.length < 100) {
+                    if (k > amountUsers) {
+                        k = 0;
+                    }
+                    users.push(users[k]);
+                    k++;
+                }
+
+                for (let i = 3; i < users.length - 50; i++) {
+                    $("#lottery ul").append("<li>" + users[i].username + "</li>");
+                }
+
+                $("#lottery ul").prepend("<li>" + users[2].username + "</li>");
+                $("#lottery ul").prepend("<li>" + users[0].username + "</li>");
+                $("#lottery ul").prepend("<li>" + users[1].username + "</li>");
+
                 
-                json.username
+                for (let i = 50; i < users.length; i++) {
+                    $("#lottery ul").append("<li>" + users[i].username + "</li>");
+                }
+
+                //$("#lottery ul").append("<li>" + users[users.length - 1].username + "</li>");
+
+                //$('#lottery ul').find('li').first().clone().appendTo($('#lottery ul')); //last user clones first user
+
                 document.getElementById("post-btn").style.display = "none";
-                $('#lottery ul').find('li').last().remove();
+
+                //$('#lottery ul').find('li').last().remove();
+
                 $('#lottery ul').playSpin({
                     endNum: [1],
                     time: 5000,
-                    loops: 3,
+                    loops: 2,
                     easing: 'linear'
                 });
             }
@@ -109,7 +148,7 @@
         });
 
         if (accessToken) {
-            $('.text-bottom').css('display','none')
+            $('.text-bottom').css('display', 'none')
         } else {
             document.getElementById("post-btn").style.display = "none";
         }
