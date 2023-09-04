@@ -27,8 +27,8 @@
         </strong>
 
 
-        <div id="animation" >
-            <div class="animation-block"> 
+        <div id="animation">
+            <div class="animation-block">
                 <!-- //style="display: none;" -->
                 <div class="background_lottery">
                     <!-- <div class="lottery-top">
@@ -54,7 +54,7 @@
                 </div>
             </div>
 
-            <div id="post-btn" class="button-an" >Определить
+            <div id="post-btn" class="button-an">Определить
                 победителя</div>
             <!-- <div class="line-canvas" id="line">
             <canvas id="canvas"></canvas>
@@ -72,165 +72,47 @@
     <script defer>
         const HOST = "https://nodejs.helpervk.ru/";
 
-        // $('#lottery ul').find('li').first();
-
-        // $('#lottery ul').appendTo(slot.$el);
-
-        $('#lottery ul').find('li').first().clone().appendTo( $('#lottery ul'));
-
-
-        $('.text-bottom').css('display', 'none')
-
-        var items = [
-            {
-                tag: "TestTag",
-                username: "TestNick1"
-            },
-            {
-                tag: "TestTag",
-                username: "TestNick"
-            },
-            {
-                tag: "TestTag",
-                username: "TestNick"
-            },
-        ];
-
-
-        $('#post-btn').click(function () {
-           // $('.animation-block').css('display', 'block')
-            //document.getElementsByClassName("animation-block")[0] = "block";
-             document.getElementById("post-btn").style.display = "none";
-            $('#lottery ul').find('li').last().remove();
-            $('#lottery ul').playSpin({
-                endNum: [1],
-                 time: 5000,
-                 loops: 3,
-                 easing: 'linear'
-                // onFinish: 1,
-                // onEnd: 1
-            });
-        });
-        //     function generate(number) {
-        //         $('.raffle-roller-container').css({
-        //             transition: "sdf",
-        //             "margin-left": "0px"
-        //         }, 10).html('');
-        //             for(var i = 0; i < 101; i++) {
-        //                 var randed = randomInt(0,items.length);
-        //                 var element = '<div class="item"> <h5 class="user-title" > ПОБЕДИТЕЛЬ КОНКУРСА</h5 > <p class="user-text"  id="CardNumber'+i+'">' + items[randed].username + '<br>' + items[randed].tag + '</p><div class="user-block-img"><img class="user-img" src="assets/images/mn-808x808.png" alt=""></div></div>';
-        //                 $(element).appendTo('.raffle-roller-container');
-        //             }
-        //         setTimeout(function () {
-        //             goRoll(number);
-        //         }, 500);
-        //     }
-
-        //     function goRoll(number) {
-        //         $('.raffle-roller-container').css({
-        //             transition: "all 13s cubic-bezier(.08,.6,0,.85)"
-        //         });
-        // document.getElementById('CardNumber78').innerHTML = items[number].username + '<br>' + items[number].tag;
-        //         setTimeout(function () {
-        //             $('#CardNumber26').addClass('winning-item');
-        //         }, 8500);
-
-        //         $('.raffle-roller-container').css('margin-left', '-6770px');
-        //     }
-
-
-
-
-        function randomInt(min, max) {
-            return Math.floor(Math.random() * (max - min)) + min;
-        }
-
-
-
-
-        // let user_background = document.getElementsByClassName("user_background");
-
-
-        // let user_backgroundRect = user_background[0].getBoundingClientRect();
-
-        // let line = document.getElementsByClassName("line")[0];
-
-        // line.style.height = user_backgroundRect.height + 'px';
-
-        // var distance_el = 50;
-
-        // var distance = user_backgroundRect.width + distance_el;
-
-        // var speed = 15;
-
-        // var width = $(window).width();
-
-        // let users = Math.floor(width / distance);
-        // console.log(users)
-
-        // let left = width / users;
-
-        // let center = Math.pow(users / 2) - 1;
-
-        //console.log(center)
 
         const accessToken = localStorage.getItem("accessToken");
 
-        //  document.getElementById("animation").style.display = "none";
-
-
-        // document.getElementById("post-btn").style.display = "none";
-
-
-
-
-        // if (accessToken) {
-        //     document.getElementById("animation").style.display = "none";
-        //     document.getElementById("post-btn").style.display = "block";
-        //     document.getElementById("line").style.display = "none";
-        // } else {
-        //     document.getElementById("line").style.display = "none";
-        //     document.getElementById("post-btn").style.display = "none";
-        //     for (let i = 0; i < users; i++) {
-        //         if (i == 0) {
-        //             user_background[0].style.left = distance_el / 2 + 'px';
-        //         } else {
-        //             user_background[i].style.left = (i) * left + distance_el / 2 + 'px';
-        //         }
-        //         // else if (i==center) {
-        //         //     user_background[0].style.left = (i)*left+distance_el/2+'px';
-        //         // } 
-        //     }
-        // }
-
-
-
-
         const button = document.getElementById('post-btn');
+
+
+
+        $('#lottery ul').find('li').first().clone().appendTo($('#lottery ul'));
 
         button.addEventListener('click', async _ => {
 
-            // document.getElementById("animation").style.display = "block";
 
-            // generate(0);
-
-            // console.log(111);
-
-            //  document.getElementById("post-btn").style.display = "none";
-
-
-
-            // let response = await fetch(HOST + 'getwinner', {
-            //     method: 'POST',
-            // });
-            // if (response.ok) {
-            //     let json = await response.json();
-            //     console.log(json);
-            // }
+            let response = await fetch(HOST + 'genwinner', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json;charset=utf-8',
+                    'Authorization': 'application/json;charset=utf-8'
+                },
+            });
+            if (response.ok) {
+                let json = await response.json();
+                console.log(json);
+                
+                json.username
+                document.getElementById("post-btn").style.display = "none";
+                $('#lottery ul').find('li').last().remove();
+                $('#lottery ul').playSpin({
+                    endNum: [1],
+                    time: 5000,
+                    loops: 3,
+                    easing: 'linear'
+                });
+            }
 
         });
 
-
+        if (accessToken) {
+            $('.text-bottom').css('display','none')
+        } else {
+            document.getElementById("post-btn").style.display = "none";
+        }
 
     </script>
 
